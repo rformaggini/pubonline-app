@@ -43,3 +43,4 @@ Thumbs.db
 
 # Plugins
 .nx/
+.husky/
