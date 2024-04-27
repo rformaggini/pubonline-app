@@ -1,0 +1,31 @@
+<div class="content-menu">
+  <div>
+    <img
+      [width]="profilePictureSize()"
+      [height]="profilePictureSize()"
+      alt="avatar"
+      src="/assets/temp-avatar/avatar.svg"
+    />
+  </div>
+  <div class="header-text" [class.hide-header-text]="menuCollapsed()">
+    <h2>Seu acesso</h2>
+    <p>Seu nome de usuario</p>
+  </div>
+  <mat-nav-list>
+    @for (item of menuItems(); track $index) {
+      <a
+        mat-list-item
+        class="menu-item"
+        [routerLink]="item.route"
+        routerLinkActive
+        #menuItemList="routerLinkActive"
+        [activated]="menuItemList.isActive"
+      >
+        <mat-icon matListItemIcon> {{ item.icon }}</mat-icon>
+        @if (!menuCollapsed()) {
+          <span matListItemTitle> {{ item.label }}</span>
+        }
+      </a>
+    }
+  </mat-nav-list>
+</div>
