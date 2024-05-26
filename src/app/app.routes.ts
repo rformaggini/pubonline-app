@@ -37,7 +37,7 @@ export const routes: Routes = [
           ),
         canActivate: [AuthGuardService],
         data: {
-          accessRole: [Role.ADMIN],
+          accessRole: [Role.ADMIN, Role.BASIC],
         },
       },
     ],

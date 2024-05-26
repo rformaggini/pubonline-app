@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLaout="row">
+        <span>Confirmation</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="isConfirmedHandler(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content>
+    <h4>Are you sure want to {{ message }} ?</h4>
+</mat-dialog-content>
+<mat-dialog-actions >
+    <div class="button-row" style=" display:flex; justify-content: space-between;">
+        <button mat-raised-button color="primary" (click)="isConfirmedHandler(true)">
+            <mat-icon>check_circle</mat-icon>
+            YES
+        </button>
+        <button mat-raised-button color="secondary" (click)="isConfirmedHandler(false)">
+            <mat-icon>cancel</mat-icon>
+            NO
+        </button>
+    </div>
+</mat-dialog-actions>

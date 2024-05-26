@@ -24,7 +24,9 @@
       "@services/*": ["./src/app/core/services/*"],
       "@guards/*": ["./src/app/core/guards/*"],
       "@constants/*": ["./src/app/core/constants/*"],
-      "@configs/*": ["./src/app/core/configs/*"]
+      "@configs/*": ["./src/app/core/configs/*"],
+      "@material-ui/*":["./src/app/material-ui/*"],
+      "@shared-components/*":["./src/app/shared/components/*"]
     }
   },
   "angularCompilerOptions": {

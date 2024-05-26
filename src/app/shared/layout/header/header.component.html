@@ -1,8 +1,11 @@
 <header>
-  <mat-toolbar color="primary" class="mat-elevation-z3">
+  <mat-toolbar color="primary" style="justify-content: space-between">
     <button mat-icon-button (click)="expandMenu()">
-        <mat-icon>menu</mat-icon>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      LOGOUT
     </button>
   </mat-toolbar>
 </header>
-

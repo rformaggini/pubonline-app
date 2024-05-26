@@ -19,7 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatDialogModule,
     MatToolbarModule, 
-    MatCardModule
+    MatCardModule,
   ],
   exports: [
     CommonModule,

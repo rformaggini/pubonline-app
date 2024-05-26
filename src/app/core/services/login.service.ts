@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '@models/login.model';
 import { environment } from '../../../environment/environment';
@@ -12,8 +12,6 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(login: Login) {
-    return this.http.post(`${this.url}`, login, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    });
+    return this.http.post(`${this.url}`, login);
   }
 }
