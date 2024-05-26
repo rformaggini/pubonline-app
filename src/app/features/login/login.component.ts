@@ -10,13 +10,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { matDialogConfig } from '@configs/mat-dialog-config';
 import { Login } from '@models/login.model';
+import { ResponseModel } from '@models/response-model';
 import { LoginService } from '@services/login.service';
 import { SnackbarService } from '@services/snackbar.service';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 import { merge } from 'rxjs';
 import { MaterialUiModule } from '../../material-ui/material-ui.module';
 import { SignupComponent } from '../../shared/components/signup/signup.component';
-import { ResponseModel } from '@models/response-model';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +48,7 @@ export class LoginComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
   }
+ 
 
   updateErrorMessage() {
     if (this.email.hasError('required')) {
