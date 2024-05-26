@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-content">
+
+    <h2>Welcome to PubOnline!</h2>
+    
+    <button mat-raised-button>Google Log in</button>
+    
+    <p>or</p>
+    
+    <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="example@example.com"
+        [formControl]="email"
+        (blur)="updateErrorMessage()"
+        required
+      />
+      @if (email.invalid) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input required matInput [type]="hide ? 'password' : 'text'" [formControl]="password" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-raised-button (click)="handleLogin()">Log in</button>
+      <button mat-raised-button color="primary" (click)="handleSignupAction()">Sign up</button>
+    </div>
+  </div>
+</div>

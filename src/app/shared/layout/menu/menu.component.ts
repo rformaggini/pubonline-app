@@ -12,15 +12,14 @@ import { MenuItem } from '@models/menu-item.model';
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
-
   menuCollapsed = signal(false);
 
   @Input() set collapsed(val: boolean) {
     this.menuCollapsed.set(val);
   }
 
-  profilePictureSize = computed(() => this.menuCollapsed() ? '32' : '100')
-  
+  profilePictureSize = computed(() => (this.menuCollapsed() ? '32' : '100'));
+
   menuItems = signal<MenuItem[]>([
     {
       icon: 'home',
@@ -33,6 +32,4 @@ export class MenuComponent {
       route: 'vacancy',
     },
   ]);
-
-  
 }

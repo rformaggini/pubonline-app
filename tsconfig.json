@@ -23,7 +23,8 @@
       "@models/*": ["./src/app/core/models/*"],
       "@services/*": ["./src/app/core/services/*"],
       "@guards/*": ["./src/app/core/guards/*"],
-      "@contants/*": ["./src/app/core/contants/*"]
+      "@constants/*": ["./src/app/core/constants/*"],
+      "@configs/*": ["./src/app/core/configs/*"]
     }
   },
   "angularCompilerOptions": {

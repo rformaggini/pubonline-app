@@ -1,0 +1,25 @@
+.mat-toolbar {
+  margin: -24px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  padding: 5px;
+}
+
+mat-hint {
+  color: red;
+}
+
+mat-card-header {
+  justify-content: space-between;
+}
+
+.mdc-card__actions{
+  display: grid;
+}
+
+.card-content {
+  display: grid;
+}

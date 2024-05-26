@@ -1,0 +1,81 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>Subscription for new user</mat-card-subtitle>
+    <mat-card-title>Fill the signup form</mat-card-title>
+
+    <button mat-icon-button color="primary" (click)="dialogClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div fxFlex fxLayout="column" class="card-content">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Enter your name</mat-label>
+          <input
+            matInput
+            [formControl]="name"
+            required
+            (blur)="updateErrorMessage()"
+          />
+          @if (name.invalid) {
+            <mat-error>{{ errorMessage }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            [formControl]="email"
+            required
+            (blur)="updateErrorMessage()"
+          />
+          @if (email.invalid) {
+            <mat-error>{{ errorMessage }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Enter your contact number</mat-label>
+          <input
+            matInput
+            [formControl]="contactNumber"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [formControl]="password"
+            required
+          />
+          @if (password.invalid) {
+            <mat-error>{{ errorMessage }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Confirm your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [formControl]="confirmPassword"
+            required
+          />
+          @if (validateDataPassword() &&  !confirmPassword.invalid) {
+            <mat-hint>
+                <span>Password and Confirm password must be equals.</span>
+            </mat-hint>
+          }
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="handleSubmit()" >
+      SAVE
+    </button>
+  </mat-card-actions>
+  <mat-card-footer> </mat-card-footer>
+</mat-card>

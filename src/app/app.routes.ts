@@ -1,9 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { DefaultComponent } from './shared/layout/default/default.component';
 import { MasterComponent } from './shared/layout/master/master.component';
-import { VacancyComponent } from './features/vacancy/vacancy.component';
 
 export const routes: Routes = [
   {
@@ -22,12 +20,20 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent,
+        loadComponent: () =>
+          import('./features/home/home.component').then((c) => c.HomeComponent),
       },
       {
-        path:'vacancy',
-        component:VacancyComponent
-      }
+        path: 'vacancy',
+        loadComponent: () =>
+          import('./features/vacancy/vacancy.component').then(
+            (c) => c.VacancyComponent,
+          ),
+      },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
