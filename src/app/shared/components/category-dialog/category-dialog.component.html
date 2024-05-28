@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <span>{{ actionName }} CATEGORY</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Enter with name of new category</mat-label>
+    <input
+      matInput
+      [formControl]="name"
+      required
+      (blur)="updateErrorMessage()"
+    />
+    @if (name.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+    }
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="submitHandler()" [disabled]="name.invalid">
+    <mat-icon>save</mat-icon> SAVE
+  </button>
+  <button mat-raised-button mat-dialog-close color="warn">
+    <mat-icon>cancel</mat-icon> CLOSE
+  </button>
+</mat-dialog-actions>

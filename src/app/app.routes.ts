@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
+import { Role } from '@enums/role';
 import { AuthGuardService } from '@guards/auth-guard.service';
 import { LoginComponent } from './features/login/login.component';
 import { DefaultComponent } from './shared/layout/default/default.component';
 import { MasterComponent } from './shared/layout/master/master.component';
-import { Role } from './core/enums/role';
 
 export const routes: Routes = [
   {
@@ -30,10 +30,10 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'vacancy',
+        path: 'category',
         loadComponent: () =>
-          import('./features/vacancy/vacancy.component').then(
-            (c) => c.VacancyComponent,
+          import('./features/category/category.component').then(
+            (c) => c.CategoryComponent,
           ),
         canActivate: [AuthGuardService],
         data: {

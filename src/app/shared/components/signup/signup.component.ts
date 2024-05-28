@@ -94,7 +94,7 @@ export class SignupComponent implements OnInit {
 
     this.userService.signUp(data).subscribe({
       next: (res: Partial<ResponseModel>) => {
-        if(res && res.message){
+        if(res && res?.message){
           this.dialogRef.close();
           this.ngxService.stop();
           this.snackBarService.openSnackBar(res.message, '');

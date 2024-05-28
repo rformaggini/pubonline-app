@@ -16,12 +16,12 @@ export class DialogConfirmationComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public dialog: { message: string; },
+    public dialogData: { message: string; },
   ) {}
 
   ngOnInit() {
-    if (this.dialog) {
-      this.message = this.dialog.message;
+    if (this.dialogData) {
+      this.message = this.dialogData.message;
     }
   }
 

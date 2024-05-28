@@ -21,12 +21,15 @@
     "paths": {
       "@components/*": ["./src/app/core/components/*"],
       "@models/*": ["./src/app/core/models/*"],
+      "@enums/*": ["./src/app/core/enums/*"],
       "@services/*": ["./src/app/core/services/*"],
       "@guards/*": ["./src/app/core/guards/*"],
       "@constants/*": ["./src/app/core/constants/*"],
+      "@shared-components/*": ["./src/app/shared/components/*"],
+      "@material-ui/*": ["./src/app/material-ui/*"],
       "@configs/*": ["./src/app/core/configs/*"],
-      "@material-ui/*":["./src/app/material-ui/*"],
-      "@shared-components/*":["./src/app/shared/components/*"]
+      "@environment/*": ["./src/environment/*"],
+      
     }
   },
   "angularCompilerOptions": {
