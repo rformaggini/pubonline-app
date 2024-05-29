@@ -11,21 +11,24 @@
     <h2>USERNAME</h2>
     <p>EMAIL</p>
   </div>
+
   <mat-nav-list>
     @for (item of menuItems(); track $index) {
-      <a
-        mat-list-item
-        class="menu-item"
-        [routerLink]="item.route"
-        routerLinkActive
-        #menuItemList="routerLinkActive"
-        [activated]="menuItemList.isActive"
-      >
-        <mat-icon matListItemIcon> {{ item.icon }}</mat-icon>
-        @if (!menuCollapsed()) {
-          <span matListItemTitle> {{ item.label }}</span>
-        }
-      </a>
+      @if(item.role.some(isItemMenuAllowed)){
+        <a
+          mat-list-item
+          class="menu-item"
+          [routerLink]="item.route"
+          routerLinkActive
+          #menuItemList="routerLinkActive"
+          [activated]="menuItemList.isActive"
+        >
+          <mat-icon matListItemIcon> {{ item.icon }}</mat-icon>
+          @if (!menuCollapsed()) {
+            <span matListItemTitle> {{ item.label }}</span>
+          }
+        </a>
+      }
     }
   </mat-nav-list>
 </div>
