@@ -48,7 +48,6 @@ export class LoginComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
   }
- 
 
   updateErrorMessage() {
     if (this.email.hasError('required')) {
@@ -68,18 +67,24 @@ export class LoginComponent {
     };
 
     this.loginService.login(data).subscribe({
-      next: (res: Partial<ResponseModel<{accessToken: string}>>) => {
-        if(res.message && res.data){
+      next: (res: Partial<ResponseModel<{ accessToken: string }>>) => {
+        if (res.message && res.data) {
           this.router.navigate(['/home']);
           this.ngxService.stop();
           this.snackBarService.openSnackBar(res.message, '');
-          localStorage.setItem('token', res.data.accessToken)
+          localStorage.setItem('token', res.data.accessToken);
           console.log(res);
         }
       },
       error: (ex) => {
         this.ngxService.stop();
-        this.snackBarService.openSnackBar(ex.error.message, 'error');
+        this.snackBarService.openSnackBar(
+          ex.error?.message
+            ? ex.error.message
+            : 'Something went wrong with login',
+          'error',
+        );
+        console.log(ex.error?.message);
       },
     });
   }

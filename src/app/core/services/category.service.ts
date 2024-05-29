@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENVIRONMENT } from '@environment/environment';
 import { Category } from '@models/category.model';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,8 +13,8 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCategories() {
-    return this.http.get(`${this.url}`);
+  getAllCategories() : Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}`);
   }
   getCategoryById(categoryId: number) {
     return this.http.get(`${this.url}/${categoryId}`);

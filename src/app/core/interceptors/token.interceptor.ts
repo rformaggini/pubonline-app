@@ -1,10 +1,12 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackbarService } from '@services/snackbar.service';
 import { catchError, throwError } from 'rxjs';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
+  const snackBarService = inject(SnackbarService);
 
   const token = localStorage.getItem('token');
   if (token) {
@@ -19,6 +21,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
         // Handle HTTP errors
         if (err.status === 401 || err.status === 403) {
           // Specific handling for unauthorized errors
+          snackBarService.openSnackBar(`Session expired, please do login again.`, 'error')
           console.error('Unauthorized request:', err);
           localStorage.clear();
           router.navigate(['/']);

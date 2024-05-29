@@ -37,7 +37,18 @@ export const routes: Routes = [
           ),
         canActivate: [AuthGuardService],
         data: {
-          accessRole: [Role.ADMIN, Role.BASIC],
+          accessRole: [Role.ADMIN],
+        },
+      },
+      {
+        path: 'product',
+        loadComponent: () =>
+          import('./features/product/product.component').then(
+            (c) => c.ProductComponent,
+          ),
+        canActivate: [AuthGuardService],
+        data: {
+          accessRole: [Role.ADMIN],
         },
       },
     ],

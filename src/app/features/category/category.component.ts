@@ -103,7 +103,13 @@ export class CategoryComponent implements OnInit {
               this.ngxService.stop();
             },
             error: (err) => {
-              this.snackbarService.openSnackBar(err.error.message, 'error');
+              console.log(err);
+              if (err.error?.message) {
+                this.snackbarService.openSnackBar(err.error.message, 'error');
+              } else if (err.message) {
+                this.snackbarService.openSnackBar(err.message, 'error');
+              }
+              dialogRef.close();
               this.ngxService.stop();
             },
           });
