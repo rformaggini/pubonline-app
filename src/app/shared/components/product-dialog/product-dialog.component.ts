@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Constants } from '@constants/constants';
 import { MaterialUiModule } from '@material-ui/material-ui.module';
 import { Category } from '@models/category.model';
 import { ProductCreate } from '@models/product-create.model';
@@ -26,14 +25,12 @@ export class ProductDialogComponent implements OnInit {
     Validators.required,
   );
   name = new FormControl('', Validators.required);
-  categoryId = new FormControl<number | null>(null, [
-    Validators.required,
-    Validators.pattern(Constants.onlyNumberRegex),
-  ]);
+  categoryId = new FormControl<number | null>(null, 
+    [Validators.required]
+  );
   description = new FormControl<string | undefined | null>('');
   price = new FormControl<number>(0, [
-    Validators.required,
-    Validators.pattern(Constants.onlyNumberRegex),
+    Validators.required
   ]);
 
   message: string = '';
@@ -164,8 +161,6 @@ export class ProductDialogComponent implements OnInit {
   updateErrorMessage() {
     if (this.validateDataRequired()) {
       this.errorMessage = 'You must enter a value';
-    } else if (this.price.hasError('pattern')) {
-      this.errorMessage = 'Only number are allowed';
     }
   }
 

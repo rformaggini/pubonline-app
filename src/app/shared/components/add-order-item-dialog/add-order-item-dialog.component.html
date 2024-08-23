@@ -1,0 +1,50 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <span>{{ actionName }} </span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content>
+  @if (dialogData.action === "edit") {
+    <mat-card-title>
+      ORDEM NUMBER : {{ dialogData.data.orderId }}</mat-card-title
+    >
+  }
+  <mat-form-field>
+    <mat-label>Select the product</mat-label>
+    <mat-select [formControl]="productId" required>
+      @for (item of productsList; track $index) {
+        <mat-option [value]="item.productId"> {{ item.name }} </mat-option>
+      }
+    </mat-select>
+    @if (productId.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter quantity</mat-label>
+    <input matInput [formControl]="quantity" type="number" required />
+    @if (quantity.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+    }
+  </mat-form-field>
+  
+  <mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addProductToList()"
+        [disabled]="productId.invalid || quantity.invalid"
+      >
+        <mat-icon>add_circle</mat-icon> ADD TO LIST
+      </button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+<mat-card-content>
+    <app-order-details [orderItems]="productsSelected" (deleteProduct)="deleteProductFromOrder($event,dialogData.data.orderId)"></app-order-details>
+</mat-card-content>
+

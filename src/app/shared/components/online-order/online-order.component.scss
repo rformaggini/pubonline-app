@@ -1,0 +1,23 @@
+mat-card-header {
+  justify-content: space-between;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+}
+app-brief-order {
+  margin: 5px;
+}
+mat-card-title {
+  font-size: 1rem;
+}
+
+div{
+  display: block;
+}
+
+button {
+  float: right;
+}

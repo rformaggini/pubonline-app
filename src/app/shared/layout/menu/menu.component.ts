@@ -45,16 +45,23 @@ export class MenuComponent implements OnInit{
       role: [Role.ADMIN],
     },
     {
+      icon: 'shopping_cart',
+      label: 'Orders',
+      route: 'order',
+      role: [Role.ADMIN, Role.STAFF],
+    },
+    /* {
       icon: 'table_bar',
       label: 'Reservaion',
       route: 'product',
       role: [Role.ADMIN],
-    },
+      receipt_long
+    }, */
     {
-      icon: 'receipt_long',
-      label: 'Bill',
-      route: 'product',
-      role: [Role.ADMIN],
+      icon: 'payments',
+      label: 'Bills',
+      route: 'bill',
+      role: [Role.ADMIN, Role.STAFF],
     },
   ]);
   

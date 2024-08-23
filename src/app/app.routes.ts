@@ -51,6 +51,28 @@ export const routes: Routes = [
           accessRole: [Role.ADMIN],
         },
       },
+      {
+        path: 'bill',
+        loadComponent: () =>
+          import('./features/bill/bill.component').then(
+            (c) => c.BillComponent,
+          ),
+        canActivate: [AuthGuardService],
+        data: {
+          accessRole: [Role.ADMIN, Role.STAFF],
+        },
+      },
+      {
+        path: 'order',
+        loadComponent: () =>
+          import('./features/order/order.component').then(
+            (c) => c.OrderComponent,
+          ),
+        canActivate: [AuthGuardService],
+        data: {
+          accessRole: [Role.ADMIN, Role.STAFF],
+        },
+      },
     ],
   },
   {

@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+      <span>{{ actionName }} COSTUMER DETAILS </span>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content>
+  <mat-card-subtitle> ORDER NUMBER {{ order.orderId }}</mat-card-subtitle>
+  <span class="spacer"></span>
+  <mat-form-field>
+    <mat-label>
+     Enter with the costumer name...
+    </mat-label>
+    <input
+    matInput
+    [formControl]="name"
+    required
+    (blur)="updateErrorMessage()"
+  />
+  @if (name.invalid) {
+    <mat-error>{{ errorMessage }}</mat-error>
+  }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>
+     Enter with the costumer contact number...
+    </mat-label>
+    <input
+    matInput
+    [formControl]="contactNumber"
+  />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>
+     Enter with the costumer email...
+    </mat-label>
+    <input
+    matInput
+    [formControl]="email"
+  />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-card-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="submitHandler()"
+    [disabled]="name.invalid"
+    >
+    <mat-icon>save</mat-icon> SAVE
+  </button>
+</mat-card-actions>

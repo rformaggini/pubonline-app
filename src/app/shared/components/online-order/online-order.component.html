@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>ORDERS ONLINE</h2>
+    </mat-card-title>
+    <button mat-flat-button color="primary" (click)="addOrderHandler()">
+      <mat-icon>add_circle</mat-icon>
+      OPEN ORDER
+    </button>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    @for (item of listOrderOnline; track $index) {
+      <app-brief-order
+        [order]="item"
+        (orderItems)="sendProductsDetails(item)"
+        (deleteOrder)="deleteOrder($event)"
+      ></app-brief-order>
+    }
+  </mat-card-content>
+</mat-card>
+<br />
+
+<mat-card>
+  <mat-card-content>
+    @if (listOrderItems) {
+      @if (listOrderItems.orderItems.length > 0) {
+        <div>
+          <mat-card-title>
+            ORDEM NUMBER : {{ listOrderItems.orderId }}</mat-card-title
+          >
+          <app-order-details
+            [orderItems]="listOrderItems.orderItems"
+            (deleteProduct)="deleteProductFromOrder($event, listOrderItems.orderId )"
+          ></app-order-details>
+        </div>
+      } @else {
+        <div>
+          <mat-card-title>
+            ORDEM NUMBER : {{ listOrderItems.orderId }}</mat-card-title
+          >
+          <mat-card-subtitle>
+            Total products:
+            {{ listOrderItems.orderItems.length }}
+          </mat-card-subtitle>
+          <mat-card-subtitle> Do you want add product ?</mat-card-subtitle>
+        </div>
+      }
+      <button mat-flat-button color="primary" (click)="addProductsHandler()">
+        <mat-icon>add_circle</mat-icon>
+        ADD PRODUCTS
+      </button>
+    } @else {
+      <mat-card-title>NO ORDER SELECTED</mat-card-title>
+    }
+  </mat-card-content>
+</mat-card>

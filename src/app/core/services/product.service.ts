@@ -18,6 +18,10 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.url}`);
   }
 
+  getAllProductsActive() {
+    return this.http.get<Product[]>(`${this.url}/getAllProductsActive`);
+  }
+
   addNewProduct(data: ProductCreate) {
     return this.http.post(`${this.url}`, data);
   }

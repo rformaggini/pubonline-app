@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "lint-staged": {
     "*.ts": "eslint"
@@ -25,6 +28,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "jspdf": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "ngx-ui-loader": "^13.0.0",
     "rxjs": "~7.8.0",
@@ -40,6 +44,7 @@
     "@angular-eslint/template-parser": "17.3.0",
     "@angular/cli": "^17.3.2",
     "@angular/compiler-cli": "^17.3.0",
+    "@cypress/schematic": "^2.5.2",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
@@ -53,6 +58,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "cypress": "latest"
   }
 }
