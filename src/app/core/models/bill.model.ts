@@ -3,6 +3,7 @@ import { Order } from './order.model';
 import { PaymentStatus } from '@enums/payment-status';
 
 export class Bill {
+  id!: number;
   name!: string;
   contactNumber!: string;
   email!: string;

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>PAYMENT METHOD</h2>
+<mat-dialog-content>
+  <p>Pick your payment method, please ...</p>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select required [(ngModel)]="data.method">
+      @for (item of paymentMethodTypes; track $index) {
+        <mat-option [value]="item">
+          {{ paymentMethodLabelMapping[item] }}</mat-option
+        >
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">Don't pay</button>
+  <button
+    mat-button
+    color="primary"
+    [mat-dialog-close]="data.method"
+    [disabled]="!data.method"
+  >
+    To pay
+  </button>
+</mat-dialog-actions>

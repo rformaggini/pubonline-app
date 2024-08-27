@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { PaymentStatus } from '@enums/payment-status';
 import { MaterialUiModule } from '@material-ui/material-ui.module';
 import { Bill } from '@models/bill.model';
 import { Order } from '@models/order.model';
+import { Payment } from '@models/payment.model';
 import { BillService } from '@services/bill.service';
-import { OrderService } from '@services/order.service';
+import { SnackbarService } from '@services/snackbar.service';
+import { ConfirmPaymentDialogComponent } from '@shared-components/confirm-payment-dialog/confirm-payment-dialog.component';
+import { DialogConfirmationComponent } from '@shared-components/dialog-confirmation/dialog-confirmation.component';
 import { jsPDF } from 'jspdf';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+('');
 
 @Component({
   selector: 'app-bill',
@@ -16,11 +23,19 @@ import { jsPDF } from 'jspdf';
 })
 export class BillComponent implements OnInit {
   dataSource = new MatTableDataSource<Bill>();
-  displayedColumns: string[] = ['orderId' , 'costumer', 'status', 'total', 'actions' ];
+  displayedColumns: string[] = [
+    'orderId',
+    'costumer',
+    'status',
+    'total',
+    'actions',
+  ];
 
   constructor(
     private billService: BillService,
-    private orderService: OrderService,
+    public dialog: MatDialog,
+    private ngxLoaderService: NgxUiLoaderService,
+    private snackbarService: SnackbarService,
   ) {}
 
   ngOnInit(): void {
@@ -30,18 +45,105 @@ export class BillComponent implements OnInit {
   getAllBills() {
     this.billService.getBillOpened().subscribe({
       next: (bills) => {
-      this.dataSource = new MatTableDataSource(bills);
-      console.log(bills)
+        this.dataSource = new MatTableDataSource(bills);
+        console.log(bills);
       },
     });
   }
 
-  sumTotalBill(element: Order){
-    return element.orderItems.reduce((sum, current) => sum + ( current?.quantity * current?.product?.price), 0);
+  sumTotalBill(element: Order) {
+    return element.orderItems.reduce(
+      (sum, current) => sum + current?.quantity * current?.product?.price,
+      0,
+    );
   }
-  
 
-  generatePdf() {
+  paybill(bill: Bill) {
+    const payment: Payment = { billId: bill.id, method: bill.paymentMethod };
+    const dialogRef = this.dialog.open(ConfirmPaymentDialogComponent, {
+      data: payment,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.ngxLoaderService.start();
+        payment.method = result;
+        this.billService.payBill(payment).subscribe({
+          next: () => {
+            this.snackbarService.openSnackBar('Bill paid with success.', '');
+            this.ngxLoaderService.stop();
+            this.getAllBills();
+          },
+          error: () => {
+            this.snackbarService.openSnackBar(
+              'Something went wrong trying to paid.',
+              'error',
+            );
+            this.ngxLoaderService.stop();
+          },
+        });
+      }
+    });
+  }
+
+  cancelBill(billId: number) {
+    const dialogRef = this.dialog.open(DialogConfirmationComponent, {
+      data: { message: `cancel the bill with Id: ${billId}` },
+    });
+
+    dialogRef.componentInstance.isConfirmedEmitter.subscribe({
+      next: (isConfirmed: boolean) => {
+        if (isConfirmed) {
+          this.ngxLoaderService.start();
+          this.billService.cancelBill(billId).subscribe({
+            next: () => {
+              this.snackbarService.openSnackBar(
+                'Bill cancelled with success.',
+                '',
+              );
+              this.ngxLoaderService.stop();
+              this.getAllBills();
+              dialogRef.close();
+            },
+            error: () => {
+              this.snackbarService.openSnackBar(
+                'Something went wrong trying to cancel the bill.',
+                'error',
+              );
+              this.ngxLoaderService.stop();
+              dialogRef.close();
+            },
+          });
+        } else {
+          dialogRef.close();
+          this.ngxLoaderService.stop();
+        }
+      },
+    });
+  }
+
+  disabledByStatus(status: PaymentStatus): boolean {
+    switch (status) {
+      case PaymentStatus.OPENED:
+        return false;
+      case PaymentStatus.CLOSED:
+        return true;
+      case PaymentStatus.PAID:
+        return true;
+      default:
+        return true;
+    }
+  }
+
+  getColor(element: string) {
+    if (element === 'OPENED') {
+      return 'green';
+    }
+    return 'red';
+  }
+
+  generatePdf(bill: Bill) {
+    console.log(bill);
     const pdf = new jsPDF();
 
     pdf.setFontSize(20);
