@@ -17,6 +17,8 @@ import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 import { merge } from 'rxjs';
 import { MaterialUiModule } from '../../material-ui/material-ui.module';
 import { SignupComponent } from '../../shared/components/signup/signup.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { GoogleSsoDirective } from '../../shared/directives/google-sso/google-sso.directive';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +28,7 @@ import { SignupComponent } from '../../shared/components/signup/signup.component
     FormsModule,
     ReactiveFormsModule,
     NgxUiLoaderModule,
+    GoogleSsoDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -43,6 +46,7 @@ export class LoginComponent {
     private loginService: LoginService,
     private snackBarService: SnackbarService,
     private ngxService: NgxUiLoaderService,
+    public auth: AngularFireAuth
   ) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())

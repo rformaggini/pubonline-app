@@ -44,3 +44,8 @@ Thumbs.db
 # Plugins
 .nx/
 .husky/
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
