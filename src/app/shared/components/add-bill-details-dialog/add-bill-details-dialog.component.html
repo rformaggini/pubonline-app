@@ -6,6 +6,7 @@
   </mat-toolbar>
   <mat-dialog-content>
   <mat-card-subtitle> ORDER NUMBER {{ order.orderId }}</mat-card-subtitle>
+  <br>
   <span class="spacer"></span>
   <mat-form-field>
     <mat-label>
@@ -20,6 +21,17 @@
   @if (name.invalid) {
     <mat-error>{{ errorMessage }}</mat-error>
   }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select the table</mat-label>
+    <mat-select [formControl]="tableId" required>
+      @for (item of tableList; track $index) {
+        <mat-option [value]="item.id"> {{ item.number }} - {{ item.description }} </mat-option>
+      }
+    </mat-select>
+    @if (tableId.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+    }
   </mat-form-field>
   <mat-form-field>
     <mat-label>
@@ -45,7 +57,7 @@
     mat-raised-button
     color="primary"
     (click)="submitHandler()"
-    [disabled]="name.invalid"
+    [disabled]="name.invalid || tableId.invalid"
     >
     <mat-icon>save</mat-icon> SAVE
   </button>

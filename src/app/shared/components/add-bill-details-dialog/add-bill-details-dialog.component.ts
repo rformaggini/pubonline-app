@@ -4,7 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialUiModule } from '@material-ui/material-ui.module';
 import { BillCreate } from '@models/bill-create.model';
 import { Order } from '@models/order.model';
+import { Table } from '@models/table.model';
 import { BillService } from '@services/bill.service';
+import { TableService } from '@services/table.service';
 
 @Component({
   selector: 'app-add-bill-details-dialog',
@@ -19,16 +21,19 @@ export class AddBillDetailsDialogComponent implements OnInit {
   actionName: string = '';
   errorMessage: string = '';
   order!: Order;
+  tableList: Table[] = [];
 
   name = new FormControl('', Validators.required);
   contactNumber = new FormControl<string>('');
   email = new FormControl<string>('');
+  tableId = new FormControl(undefined, [Validators.required]);
 
   constructor(
     public dialogRef: MatDialogRef<AddBillDetailsDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public dialogData: { data: Order; action: string },
     private billService: BillService,
+    private tableService: TableService,
   ) {
     dialogRef.disableClose = true;
   }
@@ -38,6 +43,15 @@ export class AddBillDetailsDialogComponent implements OnInit {
       this.order = this.dialogData.data;
       this.actionName = this.dialogData.action?.toLocaleUpperCase();
     }
+    this.getAllTables();
+  }
+
+  getAllTables() {
+    this.tableService.getAllTables().subscribe({
+      next: (res) => {
+        this.tableList = res;
+      },
+    });
   }
 
   submitHandler() {
@@ -47,7 +61,7 @@ export class AddBillDetailsDialogComponent implements OnInit {
       name: this.name.value ? this.name.value : '',
       contactNumber: this.contactNumber.value ? this.contactNumber.value : '',
       email: this.email.value ? this.email.value : '',
-      orderId: this.order.orderId
+      orderId: this.order.orderId,
     };
 
     if (!this.validateDataRequired()) {
@@ -55,8 +69,7 @@ export class AddBillDetailsDialogComponent implements OnInit {
         next: () => {
           this.addBillDetailsEmitter.emit();
         },
-        error: () => {
-        },
+        error: () => {},
       });
     }
   }
@@ -68,7 +81,7 @@ export class AddBillDetailsDialogComponent implements OnInit {
   }
 
   private validateDataRequired(): boolean {
-    if (this.name.hasError('required')) {
+    if (this.name.hasError('required') || this.tableId.hasError('required')) {
       return true;
     } else {
       return false;

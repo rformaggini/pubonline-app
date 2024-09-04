@@ -73,6 +73,17 @@ export const routes: Routes = [
           accessRole: [Role.ADMIN, Role.STAFF],
         },
       },
+      {
+        path: 'table',
+        loadComponent: () =>
+          import('./features/table/table.component').then(
+            (c) => c.TableComponent,
+          ),
+        canActivate: [AuthGuardService],
+        data: {
+          accessRole: [Role.ADMIN, Role.STAFF],
+        },
+      },
     ],
   },
   {

@@ -32,19 +32,21 @@
       <mat-error>{{ errorMessage }}</mat-error>
     }
   </mat-form-field>
-  
+
   <mat-dialog-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="addProductToList()"
-        [disabled]="productId.invalid || quantity.invalid"
-      >
-        <mat-icon>add_circle</mat-icon> ADD TO LIST
-      </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addProductToList()"
+      [disabled]="productId.invalid || quantity.invalid"
+    >
+      <mat-icon>add_circle</mat-icon> ADD TO LIST
+    </button>
   </mat-dialog-actions>
 </mat-dialog-content>
 <mat-card-content>
-    <app-order-details [orderItems]="productsSelected" (deleteProduct)="deleteProductFromOrder($event,dialogData.data.orderId)"></app-order-details>
+  <app-order-details
+    [orderItems]="productsSelected"
+    (deleteProduct)="deleteProductFromOrder($event, dialogData.data.orderId)"
+  ></app-order-details>
 </mat-card-content>
-

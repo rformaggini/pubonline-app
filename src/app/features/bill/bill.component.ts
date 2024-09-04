@@ -12,7 +12,6 @@ import { ConfirmPaymentDialogComponent } from '@shared-components/confirm-paymen
 import { DialogConfirmationComponent } from '@shared-components/dialog-confirmation/dialog-confirmation.component';
 import { jsPDF } from 'jspdf';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-('');
 
 @Component({
   selector: 'app-bill',
@@ -135,41 +134,51 @@ export class BillComponent implements OnInit {
     }
   }
 
-  getColor(element: string) {
-    if (element === 'OPENED') {
-      return 'green';
+  getColor(status: string): string {
+    switch (status) {
+      case PaymentStatus.OPENED:
+        return 'green';
+      case PaymentStatus.CLOSED:
+        return 'red';
+      case PaymentStatus.PAID:
+        return 'grey';
+      default:
+        return 'green';
     }
-    return 'red';
   }
 
   generatePdf(bill: Bill) {
-    console.log(bill);
     const pdf = new jsPDF();
 
     pdf.setFontSize(20);
-    pdf.text('Bill - ', 65, 15);
-    pdf.text('0001', 80, 15);
+    pdf.text('BILL NUMBER - ', 65, 15);
+    pdf.text(bill?.id.toString(), 118, 15);
 
     pdf.setFillColor(50, 50, 50);
-    pdf.rect(10, 20, 30, 8, 'FD');
-    pdf.rect(10, 28, 30, 8, 'FD');
-    pdf.rect(10, 36, 30, 8, 'FD');
-    pdf.rect(40, 20, 160, 8, 'S');
-    pdf.rect(40, 28, 160, 8, 'S');
-    pdf.rect(40, 36, 160, 8, 'S');
+    pdf.rect(10, 20, 40, 8, 'FD');
+    pdf.rect(10, 28, 40, 8, 'FD');
+    pdf.rect(10, 36, 40, 8, 'FD');
+    pdf.rect(10, 44, 40, 8, 'FD');
+    pdf.rect(50, 20, 145, 8, 'S');
+    pdf.rect(50, 28, 145, 8, 'S');
+    pdf.rect(50, 36, 145, 8, 'S');
+    pdf.rect(50, 44, 145, 8, 'S');
 
     pdf.setFontSize(12);
     pdf.setTextColor(255, 255, 255);
     pdf.text('Name:', 12, 25);
     pdf.text('Contact Number:', 12, 33);
     pdf.text('Email:', 12, 41);
-    pdf.text('Payment Method:', 12, 49);
+    pdf.text('Status:', 12, 49);
 
     pdf.setTextColor(0, 0, 0);
-    pdf.text('001', 42, 25);
-    pdf.text("Notebook 14' i7 8GB 1TB", 42, 33);
-    pdf.text('R$ 2400,00', 42, 41);
-    pdf.text('R$ 2400,00', 42, 49);
+    pdf.text(bill?.name, 52, 25);
+    pdf.text(bill?.contactNumber, 52, 33);
+    pdf.text(bill?.email, 52, 41);
+    pdf.text(bill?.status, 52, 49);
+
+    pdf.text('TOTAL :', 160, 58);
+    pdf.text(`$ ${this.sumTotalBill(bill?.order)}`, 180, 58);
 
     pdf.save('a4.pdf');
   }

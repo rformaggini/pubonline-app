@@ -33,6 +33,12 @@ export class MenuComponent implements OnInit{
       role: [Role.BASIC, Role.STAFF, Role.ADMIN],
     },
     {
+      icon: 'table_bar',
+      label: 'Tables',
+      route: 'table',
+      role: [Role.ADMIN],
+    },
+    {
       icon: 'category',
       label: 'Categories',
       route: 'category',
@@ -50,13 +56,6 @@ export class MenuComponent implements OnInit{
       route: 'order',
       role: [Role.ADMIN, Role.STAFF],
     },
-    /* {
-      icon: 'table_bar',
-      label: 'Reservaion',
-      route: 'product',
-      role: [Role.ADMIN],
-      receipt_long
-    }, */
     {
       icon: 'payments',
       label: 'Bills',
