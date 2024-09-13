@@ -1,4 +1,4 @@
-name: Deploy on DEVELOP and BuildImage Docker
+name: BuildImage Docker Deploy on DEVELOP
 
 on:
   push:
@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
     - name: Build the Docker image
+      uses: actions/checkout@v4
     
     - name: Adding Node.js
       uses: actions/setup-node@v2
