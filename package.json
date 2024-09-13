@@ -1,6 +1,6 @@
 {
-  "name": "beehome-app",
-  "version": "0.0.0",
+  "name": "pubonline-app",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
