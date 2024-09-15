@@ -1,6 +1,6 @@
 export const ENVIRONMENT = {
   production: false,
-  apiUrl: 'https://54.234.237.157/api/v1',
+  apiUrl: 'http://54.234.237.157/api/v1',
   firebase: {
     projectId: 'pubonline-app',
     appId: '1:602586420442:web:9a0804ea2001477cb8c1e3',
