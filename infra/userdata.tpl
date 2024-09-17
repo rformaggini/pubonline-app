@@ -16,28 +16,37 @@
     sudo systemctl enable containerd.service
 
 #install docker compose
-    sudo apt install docker-compose -y
+    #sudo apt install docker-compose -y
 
 #access user root
-    sudo su
+    #sudo su
 
 #create directory for angular application
-    sudo mkdir app
+    #sudo mkdir app
 
 #create directory for runner
-    #sudo mkdir actions-runner && sudo cd actions-runner
+    sudo mkdir actions-runner && sudo cd actions-runner
 
 #download runner
-    #sudo curl -o actions-runner-linux-x64-2.319.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.319.1/actions-runner-linux-x64-2.319.1.tar.gz
+    sudo curl -o actions-runner-linux-x64-2.319.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.319.1/actions-runner-linux-x64-2.319.1.tar.gz
 
 #extract runner
-    #sudo tar xzf ./actions-runner-linux-x64-2.319.1.tar.gz
+    sudo tar xzf ./actions-runner-linux-x64-2.319.1.tar.gz
 
 #configuring runner to conect EC2
-    #sudo sudo RUNNER_ALLOW_RUNASROOT=true ./config.sh --url https://github.com/rformaggini/yellowdot-api --token AMTFRHHERMCTLU7C44DZDELG4WX66
+    sudo sudo RUNNER_ALLOW_RUNASROOT=true ./config.sh --url https://github.com/rformaggini/pubonline-app --token AMTFRHC7FUWL4YZTQA2PKTDG5HAHY
 
 #installs svc agent job
-    #sudo ./svc.sh install
+    sudo ./svc.sh install
 
 #start the listing job
-    #sudo ./svc.sh start
+    sudo ./svc.sh start
+
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+#source ~/.bashrc
+#nvm install --lts
+
+#sudo apt update -y
+#sudo apt install nginx -y
+#sudo service nginx start
+
