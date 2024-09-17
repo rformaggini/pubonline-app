@@ -25,22 +25,22 @@
     #sudo mkdir app
 
 #create directory for runner
-    sudo mkdir actions-runner && sudo cd actions-runner
+    #mkdir actions-runner && cd actions-runner
 
 #download runner
-    sudo curl -o actions-runner-linux-x64-2.319.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.319.1/actions-runner-linux-x64-2.319.1.tar.gz
+    #sudo curl -o actions-runner-linux-x64-2.319.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.319.1/actions-runner-linux-x64-2.319.1.tar.gz
 
 #extract runner
-    sudo tar xzf ./actions-runner-linux-x64-2.319.1.tar.gz
+    #tar xzf ./actions-runner-linux-x64-2.319.1.tar.gz
 
 #configuring runner to conect EC2
-    sudo sudo RUNNER_ALLOW_RUNASROOT=true ./config.sh --url https://github.com/rformaggini/pubonline-app --token AMTFRHC7FUWL4YZTQA2PKTDG5HAHY
+    #RUNNER_ALLOW_RUNASROOT=true ./config.sh --url https://github.com/rformaggini/pubonline-app --token AMTFRHC7FUWL4YZTQA2PKTDG5HAHY
 
 #installs svc agent job
-    sudo ./svc.sh install
+    #sudo ./svc.sh install
 
 #start the listing job
-    sudo ./svc.sh start
+    #sudo ./svc.sh start
 
 #curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 #source ~/.bashrc

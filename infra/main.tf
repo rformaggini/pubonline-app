@@ -58,6 +58,6 @@ resource "aws_instance" "pubonline-app-ec2" {
   }
 
   tags = {
-    "name" = "pubonline-app-ec2"
+    "Name" = "angular-app"
   }
 }
