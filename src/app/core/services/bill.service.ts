@@ -4,6 +4,7 @@ import { ENVIRONMENT } from '@environment/environment';
 import { BillCreate } from '@models/bill-create.model';
 import { Bill } from '@models/bill.model';
 import { Payment } from '@models/payment.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,13 @@ export class BillService {
 
   cancelBill(billId: number) {
     return this.http.post(`${this.url}/toCancel`, billId);
+  }
+
+  countByStatusOpen(): Observable<number> {
+    return this.http.get<number>(`${this.url}/countByStatusOpen`);
+  }
+
+  countByStatusPaid(): Observable<number> {
+    return this.http.get<number>(`${this.url}/countByStatusPaid`);
   }
 }

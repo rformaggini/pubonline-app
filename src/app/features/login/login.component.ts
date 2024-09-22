@@ -73,10 +73,10 @@ export class LoginComponent {
     this.loginService.login(data).subscribe({
       next: (res: Partial<ResponseModel<{ accessToken: string }>>) => {
         if (res.message && res.data) {
+          localStorage.setItem('token', res.data.accessToken);
           this.router.navigate(['/home']);
           this.ngxService.stop();
           this.snackBarService.openSnackBar(res.message, '');
-          localStorage.setItem('token', res.data.accessToken);
           console.log(res);
         }
       },
