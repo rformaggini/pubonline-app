@@ -93,12 +93,11 @@ export class SignupComponent implements OnInit {
     };
 
     this.userService.signUp(data).subscribe({
-      next: (res: Partial<ResponseModel<{ accessToken: string }>>) => {
-        if(res?.data && res?.message ){
+      next: (res: Partial<ResponseModel>) => {
+        if(res && res?.message){
           this.dialogRef.close();
           this.ngxService.stop();
           this.snackBarService.openSnackBar(res.message, '');
-          localStorage.setItem('token', res.data.accessToken);
           this.router.navigate(['/home']);
         }
       },
